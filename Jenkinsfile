@@ -3,10 +3,7 @@ pipeline {
      tools {
        maven 'M2_HOME'
            }
-      environment {
-        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-      }
+  
   stages {
     stage('Git Checkout') {
       steps {
@@ -45,6 +42,12 @@ pipeline {
         echo 'This stage will push my new image to the dockerhub'
         sh 'docker push mazood/healthcare:1.0'
             }
+      }
+    stage('AWS-Login') {
+      steps {
+        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'Awsaccess', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+         }
+      }
     }
     stage('Terraform Operations for test workspace') {
       steps {
