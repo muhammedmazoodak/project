@@ -81,8 +81,8 @@ pipeline {
       when {
         expression {
           return currentBuild.currentResult == 'SUCCESS'
+        }
       }
-    }
       steps {
         script {
           sh '''
@@ -113,9 +113,4 @@ pipeline {
     }
   }
 }
-   
-     
-            
-   
-  
-
+ 
