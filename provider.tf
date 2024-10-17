@@ -9,8 +9,8 @@ locals {
   tags = {
     Example = local.name
   }
-}
 
 provider "aws" {
   region = "us-east-1"
+  }
 }
